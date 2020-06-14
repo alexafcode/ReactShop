@@ -15,3 +15,17 @@ export const signInApi = async (username: string, password: string) => {
   console.log(res.data);
   return res.data;
 };
+
+export const signUpApi = async (
+  username: string,
+  password: string,
+  email: string
+) => {
+  const res = await api.post<ResponseType>("/user/create", {
+    username,
+    password,
+    email,
+  });
+  console.log(res);
+  return res.data;
+};

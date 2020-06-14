@@ -1,4 +1,4 @@
-import { SystemState, SystemActionTypes, SET_LOADING } from "./types";
+import { SystemState, SystemActionTypes, EReduxActionTypes } from "./types";
 
 const initialState: SystemState = {
   isAuthenticated: false,
@@ -12,10 +12,17 @@ export function systemReducer(
   action: SystemActionTypes
 ): SystemState {
   switch (action.type) {
-    case SET_LOADING: {
+    case EReduxActionTypes.SET_LOADING: {
       return {
         ...state,
         loading: action.loading,
+      };
+    },
+    case EReduxActionTypes.SET_AUTH: {
+      return {
+        ...state,
+        token: action.token,
+        isAuthenticated: action.isAuthenticated
       };
     }
     default:
