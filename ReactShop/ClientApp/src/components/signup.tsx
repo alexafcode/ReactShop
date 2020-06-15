@@ -58,7 +58,7 @@ const SignIn: React.FC = () => {
       setErrors({ ...errors, mail: true })
       return false
     }
-    if (password.length < 6 && password !== repeatPassword) {
+    if (password.length < 6 || password !== repeatPassword) {
       setErrors({ ...errors, password: true })
       return false
     }
@@ -95,6 +95,7 @@ const SignIn: React.FC = () => {
             autoComplete="email"
             autoFocus
             onChange={createChangeHandler}
+            onBlur={() => console.log("focus out")} //ToDo
             value={formFields.email}
             error={errors.mail}
           />

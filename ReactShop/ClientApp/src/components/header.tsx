@@ -84,7 +84,7 @@ export default function Header() {
         >
           <AccountCircle />
         </IconButton>
-        {isAuthenticated ? <p>Profile</p> : <p>Login</p>}
+        {isAuthenticated ? <p>Profile</p> : <Button href={"/signup"}>Login</Button>}
       </MenuItem>
     </Menu>
   );
@@ -119,7 +119,7 @@ export default function Header() {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton> : <Button color="inherit">Login</Button>}
+            </IconButton> : <Button href={"/signup"} color="inherit">Login</Button>}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

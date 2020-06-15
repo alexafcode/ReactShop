@@ -17,7 +17,7 @@ export function systemReducer(
         ...state,
         loading: action.loading,
       };
-    },
+    }
     case EReduxActionTypes.SET_AUTH: {
       return {
         ...state,

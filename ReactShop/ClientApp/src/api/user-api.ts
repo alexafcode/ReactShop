@@ -3,8 +3,8 @@ import { UserProfileType } from "../store/user/types";
 
 interface ResponseType {
   data: UserProfileType;
-  resultCode: number;
-  messages: Array<string>;
+  status: number;
+  statusText: string;
 }
 
 export const signInApi = async (username: string, password: string) => {
@@ -21,11 +21,16 @@ export const signUpApi = async (
   password: string,
   email: string
 ) => {
-  const res = await api.post<ResponseType>("/user/create", {
-    username,
-    password,
-    email,
-  });
-  console.log(res);
-  return res.data;
+  try {
+    const res = await api.post<ResponseType>("/user/create", {
+      username,
+      password,
+      email,
+    });
+    console.log(res)
+    return res
+  }
+  catch (error) {
+    console.log(error.message);
+  }
 };
