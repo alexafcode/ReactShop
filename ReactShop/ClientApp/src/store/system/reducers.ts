@@ -3,6 +3,7 @@ import { SystemState, SystemActionTypes, EReduxActionTypes } from "./types";
 const initialState: SystemState = {
   isAuthenticated: false,
   token: "",
+  refToken: "",
   error: false,
   loading: false,
 };
@@ -22,7 +23,8 @@ export function systemReducer(
       return {
         ...state,
         token: action.token,
-        isAuthenticated: action.isAuthenticated
+        isAuthenticated: action.isAuthenticated,
+        refToken: action.refToken
       };
     }
     default:

@@ -1,6 +1,7 @@
 export interface SystemState {
   isAuthenticated: boolean;
   token: string;
+  refToken: string,
   error: boolean;
   loading: boolean;
 }
@@ -20,6 +21,7 @@ export interface SetLoading {
 export interface SetAuth {
   type: typeof EReduxActionTypes.SET_AUTH;
   token: string;
+  refToken: string;
   isAuthenticated: boolean;
 }
 

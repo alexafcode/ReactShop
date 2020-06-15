@@ -1,8 +1,14 @@
 import api from "./api";
-import { UserProfileType } from "../store/user/types";
 
+interface ResponseTypeData {
+  user: string;
+  email: string;
+  isAdmin: boolean;
+  token: string
+  refToken: string
+}
 interface ResponseType {
-  data: UserProfileType;
+  data: ResponseTypeData;
   status: number;
   statusText: string;
 }
@@ -22,13 +28,13 @@ export const signUpApi = async (
   email: string
 ) => {
   try {
-    const res = await api.post<ResponseType>("/user/create", {
+    const res = await api.post<ResponseTypeData>("/user/create", {
       username,
       password,
       email,
     });
     console.log(res)
-    return res
+    return res.data
   }
   catch (error) {
     console.log(error.message);

@@ -1,7 +1,8 @@
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { signInApi, signUpApi } from "../../api/user-api";
 import { AnyAction } from "redux";
-import { isLoading } from "../system/actions";
+import { isLoading, setAuth } from "../system/actions";
+
 
 export const signIn = (
   username: string,
@@ -28,6 +29,11 @@ export const signUp = (
     console.log(username);
     const userData = await signUpApi(username, password, email);
     console.log(userData);
-    dispatch(isLoading(false));
+    if(userData) {
+      const {token, email, isAdmin, user, refToken} = userData;
+      dispatch(setAuth(token, refToken, true))
+      dispatch(isLoading(false));
+    }
   };
 };
+
