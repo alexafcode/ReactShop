@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from "./history";
-import { Header, Main, SignUp } from "./components";
+import { Header, Main, SignUp, SignIn } from "./components";
 
 const App = () => (
   <Router history={history}>
@@ -9,6 +9,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" component={Main} />
       <Route path="/signup" component={SignUp} />
+      <Route path="/signin" component={SignIn} />
     </Switch>
   </Router>
 

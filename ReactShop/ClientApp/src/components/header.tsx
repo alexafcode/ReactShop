@@ -1,6 +1,6 @@
 import React from 'react';
 import { RootState } from "../store"
-import { useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,7 +13,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Header() {
   const { isAuthenticated } = useSelector((state: RootState) => state.system)
+  const history = useHistory();
 
   const classes = useStyles();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState<boolean>(false);
@@ -85,7 +87,7 @@ export default function Header() {
         >
           <AccountCircle />
         </IconButton>
-        {isAuthenticated ? <p>Profile</p> : <Button href={"/signup"}>Login</Button>}
+        {isAuthenticated ? <p>Profile</p> : <Button onClick={() => history.push("/signup")}>Login</Button>}
       </MenuItem>
     </Menu>
   );
@@ -120,7 +122,8 @@ export default function Header() {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton> : <Button href={"/signup"} color="inherit">Login</Button>}
+            </IconButton> : <Button onClick={() => history.push("/signup")} color="inherit">Login</Button>}
+            {/* </IconButton> : <Link to={"/signup"}>Login</Link>} */}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

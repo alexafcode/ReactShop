@@ -49,7 +49,14 @@ namespace ReactShop.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+                // return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+                var error = new
+                {
+                    message = e.Message,
+                    status = Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError
+                };
+                Response.StatusCode = error.status;
+                return new ObjectResult(error);
             }
 
             if (user == null)
@@ -81,7 +88,14 @@ namespace ReactShop.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+                // return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+                var error = new
+                {
+                    message = e.Message,
+                    status = Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError
+                };
+                Response.StatusCode = error.status;
+                return new ObjectResult(error);
             }
 
             if (user == null)

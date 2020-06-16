@@ -10,11 +10,11 @@ export interface SystemState {
 export enum EReduxActionTypes {
   SET_LOADING = "SET_LOADING",
   SET_AUTH = "SET_AUTH",
-}
-
-export interface SetLoading {
-  type: typeof EReduxActionTypes.SET_LOADING;
-  loading: boolean;
+  SET_ERROR = "SET_ERROR",
+  FETCH_REQUEST = "FETCH_REQUEST",
+  FETCH_SUCCESS = "FETCH_SUCCESS",
+  FETCH_ERROR = "FETCH_ERROR",
+  SET_FETCH = "SET_FETCH",
 }
 
 export interface SetAuth {
@@ -24,4 +24,19 @@ export interface SetAuth {
   isAuthenticated: boolean;
 }
 
-export type SystemActionTypes = SetLoading | SetAuth;
+export interface SetLoading {
+  type: typeof EReduxActionTypes.SET_LOADING;
+  loading: boolean;
+}
+
+export interface SetFetch {
+  type: typeof EReduxActionTypes.SET_FETCH;
+  error: boolean;
+  loading: boolean;
+}
+
+export interface FetchRequest {
+  type: typeof EReduxActionTypes.FETCH_REQUEST;
+}
+
+export type SystemActionTypes = SetLoading | SetAuth | SetFetch;

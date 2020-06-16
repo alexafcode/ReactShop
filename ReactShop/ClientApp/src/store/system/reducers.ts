@@ -24,7 +24,14 @@ export function systemReducer(
         ...state,
         token: action.token,
         isAuthenticated: action.isAuthenticated,
-        refToken: action.refToken
+        refToken: action.refToken,
+      };
+    }
+    case EReduxActionTypes.SET_FETCH: {
+      return {
+        ...state,
+        error: action.error,
+        loading: action.loading,
       };
     }
     default:

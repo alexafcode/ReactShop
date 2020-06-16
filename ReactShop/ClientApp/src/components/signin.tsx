@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useForm from "../hooks/useForm"
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../store"
-import { signUp } from "../store/user/actions"
+import { signIn } from "../store/user/actions"
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -36,50 +36,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp: React.FC = () => {
+const SignIn: React.FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const { loading, isAuthenticated } = useSelector((state: RootState) => state.system);
 
-  if (isAuthenticated) {
-    history.push("/")
-  }
-
-  const initialState = {
-    mail: "",
-    password: "",
-    repeatPassword: ""
-  }
-  const [errors, setErrors] = useState(initialState)
+  const [errors, setErrors] = useState("")
 
   const [formFields, createChangeHandler] = useForm({
     email: "",
     password: "",
-    repeatPassword: ""
   });
 
-  const validateFields = (): boolean => {
-    const { password, repeatPassword } = formFields;
-    setErrors({ ...initialState });
-    if (password.length < 6) {
-      setErrors({ ...errors, password: "Password must be 6 characters long!" })
-      return false
-    }
-    if (password !== repeatPassword) {
-      setErrors({ ...errors, repeatPassword: "Passwords must match!" })
-      return false
-    }
-    return true
+  if (isAuthenticated) {
+    // return <Redirect push to="/" />;
+    history.push("/")
   }
+
 
   const checkEmail = () => {
     if (formFields.email.length) {
-      setErrors({ ...errors, mail: "" })
+      setErrors("")
       const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3, 9}[\.][a-z]{2, 5}/g;
       const result = pattern.test(formFields.email);
       if (result) {
-        setErrors({ ...errors, mail: "Email is not valid!" })
+        setErrors("Email is not valid!")
       }
     }
   }
@@ -88,8 +70,8 @@ const SignUp: React.FC = () => {
   const handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault()
     const { email, password } = formFields;
-    if (!errors.mail && validateFields()) {
-      dispatch(signUp(email, password, email))
+    if (!errors) {
+      dispatch(signIn(email, password))
       console.log("success")
     }
   }
@@ -104,7 +86,7 @@ const SignUp: React.FC = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign Up
+          Sign In
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
@@ -118,11 +100,11 @@ const SignUp: React.FC = () => {
             autoComplete="email"
             autoFocus
             onChange={createChangeHandler}
-            onBlur={checkEmail} //ToDo
+            onBlur={checkEmail}
             value={formFields.email}
-            error={!!errors.mail}
+            error={!!errors}
           />
-          <FormHelperText error={!!errors.mail}>{errors.mail}</FormHelperText>
+          <FormHelperText error={!!errors}>{errors}</FormHelperText>
           <TextField
             variant="outlined"
             margin="normal"
@@ -135,24 +117,7 @@ const SignUp: React.FC = () => {
             autoComplete="current-password"
             onChange={createChangeHandler}
             value={formFields.password}
-            error={!!errors.password}
           />
-          <FormHelperText error={!!errors.password}>{errors.password}</FormHelperText>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="repeatPassword"
-            name="repeatPassword"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            onChange={createChangeHandler}
-            value={formFields.repeatPassword}
-            error={!!errors.repeatPassword}
-          />
-          <FormHelperText error={!!errors.repeatPassword}>{errors.repeatPassword}</FormHelperText>
           {linearProgress}
           <Button
             type="submit"
@@ -162,12 +127,12 @@ const SignUp: React.FC = () => {
             className={classes.submit}
             onClick={handleSubmit}
           >
-            Sign Up
+            Sign In
           </Button>
           <Grid container>
             <Grid item>
-              <Link to="/signin">
-                "Don't have an account? Sign In"
+              <Link to="/signup">
+                "Creacte New Account? Sign Up"
               </Link>
             </Grid>
           </Grid>
@@ -177,4 +142,4 @@ const SignUp: React.FC = () => {
   );
 }
 
-export default SignUp;
+export default SignIn;

@@ -4,22 +4,27 @@ interface ResponseTypeData {
   user: string;
   email: string;
   isAdmin: boolean;
-  token: string
-  refToken: string
+  token: string;
+  refToken: string;
+  userAvatar: string;
 }
-interface ResponseType {
-  data: ResponseTypeData;
-  status: number;
-  statusText: string;
-}
+// interface ResponseType {
+//   data: ResponseTypeData;
+//   status: number;
+//   statusText: string;
+// }
 
-export const signInApi = async (username: string, password: string) => {
-  const res = await api.post<ResponseType>("/user/signin", {
-    username,
-    password,
-  });
-  console.log(res.data);
-  return res.data;
+export const signInApi = async (login: string, password: string) => {
+  try {
+    const res = await api.post<ResponseTypeData>("/user/signin", {
+      login,
+      password,
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error.response.data.message);
+    throw error.response.data.message;
+  }
 };
 
 export const signUpApi = async (
@@ -33,10 +38,10 @@ export const signUpApi = async (
       password,
       email,
     });
-    console.log(res)
-    return res.data
-  }
-  catch (error) {
-    console.log(error.message);
+    console.log(res);
+    return res.data;
+  } catch (error) {
+    console.log(error.response.data.message);
+    throw error.response.data.message;
   }
 };
