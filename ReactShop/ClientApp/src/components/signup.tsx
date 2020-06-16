@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -38,8 +39,9 @@ const SignIn: React.FC = () => {
   const dispatch = useDispatch();
 
   const initialState = {
-    mail: false,
-    password: false
+    mail: "",
+    password: "",
+    repeatPassword: ""
   }
   const [errors, setErrors] = useState(initialState)
 
@@ -50,37 +52,36 @@ const SignIn: React.FC = () => {
   });
 
   const validateFields = (): boolean => {
-    const { email, password, repeatPassword } = formFields;
-    setErrors(initialState)
-    const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
-    const checkEmail = pattern.test(email);
-    if (!checkEmail) {
-      setErrors({ ...errors, mail: true })
+    const { password, repeatPassword } = formFields;
+    setErrors({ ...initialState });
+    if (password.length < 6) {
+      setErrors({ ...errors, password: "Password must be 6 characters long!" })
       return false
     }
-    if (password.length < 6 || password !== repeatPassword) {
-      setErrors({ ...errors, password: true })
+    if (password !== repeatPassword) {
+      setErrors({ ...errors, repeatPassword: "Passwords must match!" })
       return false
     }
     return true
   }
 
-  // const checkEmail = () => {
-  //   if (formFields.email.length) {
-  //     setErrors(initialState)
-  //     const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
-  //     const result = pattern.test(formFields.email);
-  //     if (!result) {
-  //       setErrors({ ...errors, mail: true })
-  //     }
-  //   }
-  // }
+  const checkEmail = () => {
+    if (formFields.email.length) {
+      setErrors({ ...errors, mail: "" })
+      const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+      const result = pattern.test(formFields.email);
+      if (!result) {
+        setErrors({ ...errors, mail: "Email is not valid!" })
+      }
+    }
+  }
 
 
   const handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault()
-    if (validateFields()) {
-      dispatch(signUp(formFields.email, formFields.password, formFields.email))
+    const { email, password } = formFields;
+    if (!errors.mail && validateFields()) {
+      dispatch(signUp(email, password, email))
       console.log("success")
     }
   }
@@ -107,10 +108,11 @@ const SignIn: React.FC = () => {
             autoComplete="email"
             autoFocus
             onChange={createChangeHandler}
-            // onBlur={checkEmail} //ToDo
+            onBlur={checkEmail} //ToDo
             value={formFields.email}
-            error={errors.mail}
+            error={!!errors.mail}
           />
+          <FormHelperText error={!!errors.mail}>{errors.mail}</FormHelperText>
           <TextField
             variant="outlined"
             margin="normal"
@@ -123,8 +125,9 @@ const SignIn: React.FC = () => {
             autoComplete="current-password"
             onChange={createChangeHandler}
             value={formFields.password}
-            error={errors.password}
+            error={!!errors.password}
           />
+          <FormHelperText error={!!errors.password}>{errors.password}</FormHelperText>
           <TextField
             variant="outlined"
             margin="normal"
@@ -137,8 +140,9 @@ const SignIn: React.FC = () => {
             autoComplete="current-password"
             onChange={createChangeHandler}
             value={formFields.repeatPassword}
-            error={errors.password}
+            error={!!errors.repeatPassword}
           />
+          <FormHelperText error={!!errors.repeatPassword}>{errors.repeatPassword}</FormHelperText>
           <Button
             type="submit"
             fullWidth
