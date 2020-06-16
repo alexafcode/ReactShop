@@ -1,15 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+import history from "./history";
 import { Header, Main, SignUp } from "./components";
 
 const App = () => (
-  <BrowserRouter>
+  <Router history={history}>
     <Header />
     <Switch>
       <Route exact path="/" component={Main} />
       <Route path="/signup" component={SignUp} />
     </Switch>
-  </BrowserRouter>
+  </Router>
 
 )
 

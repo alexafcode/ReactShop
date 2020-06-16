@@ -1,7 +1,7 @@
 export interface SystemState {
   isAuthenticated: boolean;
   token: string;
-  refToken: string,
+  refToken: string;
   error: boolean;
   loading: boolean;
 }
@@ -11,7 +11,6 @@ export enum EReduxActionTypes {
   SET_LOADING = "SET_LOADING",
   SET_AUTH = "SET_AUTH",
 }
-
 
 export interface SetLoading {
   type: typeof EReduxActionTypes.SET_LOADING;

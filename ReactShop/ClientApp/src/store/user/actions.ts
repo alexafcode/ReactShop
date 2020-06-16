@@ -1,8 +1,8 @@
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { signInApi, signUpApi } from "../../api/user-api";
+import history from "../../history";
 import { AnyAction } from "redux";
 import { isLoading, setAuth } from "../system/actions";
-
 
 export const signIn = (
   username: string,
@@ -26,14 +26,13 @@ export const signUp = (
 ): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     dispatch(isLoading(true));
-    console.log(username);
     const userData = await signUpApi(username, password, email);
     console.log(userData);
-    if(userData) {
-      const {token, email, isAdmin, user, refToken} = userData;
-      dispatch(setAuth(token, refToken, true))
+    if (userData) {
+      const { token, email, isAdmin, user, refToken } = userData;
+      dispatch(setAuth(token, refToken, true));
       dispatch(isLoading(false));
+      history.push("/");
     }
   };
 };
-
