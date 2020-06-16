@@ -65,6 +65,18 @@ const SignIn: React.FC = () => {
     return true
   }
 
+  // const checkEmail = () => {
+  //   if (formFields.email.length) {
+  //     setErrors(initialState)
+  //     const pattern = /[a-zA-Z0-9]+[\.]?([a-zA-Z0-9]+)?[\@][a-z]{3,9}[\.][a-z]{2,5}/g;
+  //     const result = pattern.test(formFields.email);
+  //     if (!result) {
+  //       setErrors({ ...errors, mail: true })
+  //     }
+  //   }
+  // }
+
+
   const handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault()
     if (validateFields()) {
@@ -95,7 +107,7 @@ const SignIn: React.FC = () => {
             autoComplete="email"
             autoFocus
             onChange={createChangeHandler}
-            onBlur={() => console.log("focus out")} //ToDo
+            // onBlur={checkEmail} //ToDo
             value={formFields.email}
             error={errors.mail}
           />
