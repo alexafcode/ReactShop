@@ -4,6 +4,7 @@ export interface SystemState {
   refToken: string;
   error: boolean;
   loading: boolean;
+  error_text: string;
 }
 
 // export const SET_LOADING = "SET_LOADING";
@@ -15,6 +16,7 @@ export enum EReduxActionTypes {
   FETCH_SUCCESS = "FETCH_SUCCESS",
   FETCH_ERROR = "FETCH_ERROR",
   SET_FETCH = "SET_FETCH",
+  CLEAR_ERROR = "CLEAR_ERROR",
 }
 
 export interface SetAuth {
@@ -33,10 +35,14 @@ export interface SetFetch {
   type: typeof EReduxActionTypes.SET_FETCH;
   error: boolean;
   loading: boolean;
+  error_text?: string;
+}
+export interface ClearError {
+  type: typeof EReduxActionTypes.CLEAR_ERROR;
 }
 
 export interface FetchRequest {
   type: typeof EReduxActionTypes.FETCH_REQUEST;
 }
 
-export type SystemActionTypes = SetLoading | SetAuth | SetFetch;
+export type SystemActionTypes = SetLoading | SetAuth | SetFetch | ClearError;

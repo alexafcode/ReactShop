@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useForm from "../hooks/useForm"
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../store"
 import { signIn } from "../store/user/actions"
+import { clearError } from "../store/system/actions"
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -40,7 +41,11 @@ const SignIn: React.FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const { loading, isAuthenticated } = useSelector((state: RootState) => state.system);
+  const { loading, isAuthenticated, error_text, error } = useSelector((state: RootState) => state.system);
+
+  useEffect(() => {
+    dispatch(clearError())
+  }, [])
 
   const [errors, setErrors] = useState("")
 
@@ -119,6 +124,7 @@ const SignIn: React.FC = () => {
             value={formFields.password}
           />
           {linearProgress}
+          <FormHelperText error={error}>{error_text}</FormHelperText>
           <Button
             type="submit"
             fullWidth

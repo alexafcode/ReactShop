@@ -6,6 +6,7 @@ const initialState: SystemState = {
   refToken: "",
   error: false,
   loading: false,
+  error_text: "",
 };
 
 export function systemReducer(
@@ -32,6 +33,14 @@ export function systemReducer(
         ...state,
         error: action.error,
         loading: action.loading,
+        error_text: action.error_text || "",
+      };
+    }
+    case EReduxActionTypes.CLEAR_ERROR: {
+      return {
+        ...state,
+        error: false,
+        error_text: "",
       };
     }
     default:

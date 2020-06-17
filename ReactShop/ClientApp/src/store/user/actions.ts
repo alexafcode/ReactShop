@@ -22,7 +22,7 @@ export const signIn = (
     history.push("/");
   } catch (e) {
     console.log(e); // ToDo message reducer
-    dispatch(setFetch(true, false));
+    dispatch(setFetch(true, false, e));
   }
 };
 
@@ -44,7 +44,7 @@ export const signUp = (
     history.push("/");
   } catch (e) {
     console.log(e); // ToDo
-    dispatch(setFetch(true, false));
+    dispatch(setFetch(true, false, e));
   }
 };
 

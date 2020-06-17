@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         display: 'block',
       },
+      cursor: "pointer"
     },
     sectionDesktop: {
       display: 'none',
@@ -96,15 +97,15 @@ export default function Header() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
             <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          </IconButton> */}
+          <Typography className={classes.title} variant="h6" noWrap onClick={() => history.push("/")}>
             React Shop
           </Typography>
           <div className={classes.grow} />
