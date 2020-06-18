@@ -1,9 +1,9 @@
 import React from "react";
 
-const Main: React.FC = () => {
+const ProductList: React.FC = () => {
   return (
     <div><p>Main</p></div>
   )
 }
 
-export default Main;
+export default ProductList;
