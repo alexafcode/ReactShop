@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import history from "../history";
 import { Provider } from "react-redux";
 import { Header } from "../components";
-import { setAuth } from "../store/system/actions";
+import { setAuth } from "../store/user/actions";
 import { Button, Typography, IconButton } from "@material-ui/core";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
@@ -46,7 +46,7 @@ describe("Header component tests", () => {
   it("should not have a Button component and add IconButton component (AccountCircle) after authorization", () => {
     //There should be one Button elements
     expect(wrapper.find(Button)).toHaveLength(1);
-    store.dispatch(setAuth("", "", true));
+    store.dispatch(setAuth());
 
     wrapper.update();
     //There should no have Button elements

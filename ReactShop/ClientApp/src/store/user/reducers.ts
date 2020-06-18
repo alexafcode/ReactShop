@@ -9,7 +9,13 @@ const initialState: UserProfileType = {
   email: null,
   isAdmin: false,
   userAvatar: null,
+  isAuthenticated: false,
+  token: "",
+  refToken: "",
 };
+
+// const defaultState =
+//   JSON.parse(localStorage.getItem("")!) || initialState;
 
 export function userReducer(
   state = initialState,
@@ -19,10 +25,13 @@ export function userReducer(
     case UserReduxActionTypes.SET_USER: {
       return {
         ...state,
-        user: action.user,
-        email: action.email,
-        isAdmin: action.isAdmin,
-        userAvatar: action.userAvatar,
+        ...action.data,
+      };
+    }
+    case UserReduxActionTypes.SET_AUTH: {
+      return {
+        ...state,
+        isAuthenticated: true,
       };
     }
     default:

@@ -41,7 +41,8 @@ const SignIn: React.FC = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const { loading, isAuthenticated, error_text, error } = useSelector((state: RootState) => state.system);
+  const { loading, error_text, error } = useSelector((state: RootState) => state.system);
+  const { isAuthenticated, } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     dispatch(clearError())

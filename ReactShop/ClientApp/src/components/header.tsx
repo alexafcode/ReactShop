@@ -47,8 +47,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Header() {
-  const { isAuthenticated } = useSelector((state: RootState) => state.system, shallowEqual)
-  const { userAvatar } = useSelector((state: RootState) => state.user, shallowEqual)
+  // const { isAuthenticated } = useSelector((state: RootState) => state.system, shallowEqual)
+  const { userAvatar, isAuthenticated } = useSelector((state: RootState) => state.user, shallowEqual)
 
   const history = useHistory();
 

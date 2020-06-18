@@ -1,9 +1,6 @@
 import { SystemState, SystemActionTypes, EReduxActionTypes } from "./types";
 
 const initialState: SystemState = {
-  isAuthenticated: false,
-  token: "",
-  refToken: "",
   error: false,
   loading: false,
   error_text: "",
@@ -18,14 +15,6 @@ export function systemReducer(
       return {
         ...state,
         loading: action.loading,
-      };
-    }
-    case EReduxActionTypes.SET_AUTH: {
-      return {
-        ...state,
-        token: action.token,
-        isAuthenticated: action.isAuthenticated,
-        refToken: action.refToken,
       };
     }
     case EReduxActionTypes.SET_FETCH: {

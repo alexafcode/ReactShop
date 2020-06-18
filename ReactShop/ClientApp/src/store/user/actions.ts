@@ -2,8 +2,8 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { signInApi, signUpApi } from "../../api/user-api";
 import history from "../../history";
 import { AnyAction } from "redux";
-import { isLoading, setAuth, setFetch } from "../system/actions";
-import { UserReduxActionTypes, SetUser } from "./types";
+import { isLoading, setFetch } from "../system/actions";
+import { UserReduxActionTypes, SetUser, SetUserProps, SetAuth } from "./types";
 
 export const signIn = (
   username: string,
@@ -15,14 +15,16 @@ export const signIn = (
   try {
     const userData = await signInApi(username, password);
     console.log(userData);
-    const { token, email, isAdmin, user, refToken, userAvatar } = userData;
-    dispatch(setAuth(token, refToken, true));
-    dispatch(SetUserAction(email, isAdmin, user, userAvatar));
+    const data: SetUserProps = {
+      ...userData,
+      isAuthenticated: true,
+    };
+    dispatch(setUserAction(data));
     dispatch(isLoading(false));
     history.push("/");
-  } catch (e) {
-    console.log(e); // ToDo message reducer
-    dispatch(setFetch(true, false, e));
+  } catch (message) {
+    console.log(message);
+    dispatch(setFetch(true, false, message));
   }
 };
 
@@ -37,28 +39,26 @@ export const signUp = (
   try {
     const userData = await signUpApi(username, password, mail);
     console.log(userData);
-    const { token, email, isAdmin, user, refToken } = userData;
-    dispatch(setAuth(token, refToken, true));
-    dispatch(SetUserAction(email, isAdmin, user, null));
+    const data: SetUserProps = {
+      ...userData,
+      isAuthenticated: true,
+    };
+
+    dispatch(setUserAction(data));
     dispatch(isLoading(false));
     history.push("/");
-  } catch (e) {
-    console.log(e); // ToDo
-    dispatch(setFetch(true, false, e));
+  } catch (message) {
+    console.log(message);
+    dispatch(setFetch(true, false, message));
   }
 };
 
-export const SetUserAction = (
-  email: string,
-  isAdmin: boolean,
-  user: string,
-  userAvatar: string | null
-): SetUser => {
+export const setUserAction = (data: SetUserProps): SetUser => {
   return {
     type: UserReduxActionTypes.SET_USER,
-    email,
-    isAdmin,
-    user,
-    userAvatar,
+    data,
   };
+};
+export const setAuth = (): SetAuth => {
+  return { type: UserReduxActionTypes.SET_AUTH };
 };

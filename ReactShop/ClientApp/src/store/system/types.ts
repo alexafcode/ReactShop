@@ -1,13 +1,9 @@
 export interface SystemState {
-  isAuthenticated: boolean;
-  token: string;
-  refToken: string;
   error: boolean;
   loading: boolean;
   error_text: string;
 }
 
-// export const SET_LOADING = "SET_LOADING";
 export enum EReduxActionTypes {
   SET_LOADING = "SET_LOADING",
   SET_AUTH = "SET_AUTH",
