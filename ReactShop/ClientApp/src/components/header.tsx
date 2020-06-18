@@ -1,6 +1,6 @@
 import React from 'react';
 import { RootState } from "../store"
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -9,12 +9,12 @@ import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,7 +47,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Header() {
-  const { isAuthenticated } = useSelector((state: RootState) => state.system)
+  const { isAuthenticated } = useSelector((state: RootState) => state.system, shallowEqual)
+  const { userAvatar } = useSelector((state: RootState) => state.user, shallowEqual)
+
   const history = useHistory();
 
   const classes = useStyles();
@@ -60,6 +62,9 @@ export default function Header() {
   const handleMobileMenuOpen = () => {
     setMobileMenuOpen(true);
   };
+
+  const mobileAuthMenu = isAuthenticated ? <p>Profile</p> : <Button onClick={() => history.push("/signup")}>Login</Button>
+  const accountMenu = !userAvatar ? <AccountCircle /> : <Avatar alt="avatar" src={userAvatar} />
 
   const menuId = 'primary-search-account-menu';
 
@@ -86,9 +91,9 @@ export default function Header() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          {accountMenu}
         </IconButton>
-        {isAuthenticated ? <p>Profile</p> : <Button onClick={() => history.push("/signup")}>Login</Button>}
+        {mobileAuthMenu}
       </MenuItem>
     </Menu>
   );
@@ -122,9 +127,8 @@ export default function Header() {
               aria-haspopup="true"
               color="inherit"
             >
-              <AccountCircle />
+              {accountMenu}
             </IconButton> : <Button onClick={() => history.push("/signup")} color="inherit">Login</Button>}
-            {/* </IconButton> : <Link to={"/signup"}>Login</Link>} */}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
