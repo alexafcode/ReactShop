@@ -1,3 +1,4 @@
+import { loadState } from "../../api/localStorage";
 import {
   UserProfileType,
   UserActionTypes,
@@ -14,11 +15,22 @@ const initialState: UserProfileType = {
   refToken: "",
 };
 
-// const defaultState =
-//   JSON.parse(localStorage.getItem("")!) || initialState;
+const persistedState = loadState();
+const defaultState = { ...persistedState } || initialState;
+
+// const data: UserProfileType = JSON.parse(localStorage.getItem("user")!);
+// const defaultState = { ...data } || initialState;
+
+// const persistedState = loadState();
+// console.log(persistedState)
+// const store = createStore(
+//   rootReducer,
+//   persistedState,
+//   applyMiddleware(thunk, loggerMiddleware)
+// );
 
 export function userReducer(
-  state = initialState,
+  state = defaultState,
   action: UserActionTypes
 ): UserProfileType {
   switch (action.type) {
