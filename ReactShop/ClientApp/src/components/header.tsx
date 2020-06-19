@@ -1,20 +1,20 @@
-import React from 'react';
-import { RootState } from "../store"
-import { useSelector, shallowEqual } from 'react-redux';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MoreIcon from '@material-ui/icons/MoreVert';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { useHistory } from 'react-router-dom';
-import { Button } from '@material-ui/core';
-import Avatar from '@material-ui/core/Avatar';
+import React from "react";
+import { RootState } from "../store";
+import { useSelector, shallowEqual } from "react-redux";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import Badge from "@material-ui/core/Badge";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { useHistory } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,54 +25,71 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(2),
     },
     title: {
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block',
+      display: "none",
+      [theme.breakpoints.up("sm")]: {
+        display: "block",
       },
-      cursor: "pointer"
+      cursor: "pointer",
     },
     sectionDesktop: {
-      display: 'none',
-      [theme.breakpoints.up('md')]: {
-        display: 'flex',
+      display: "none",
+      [theme.breakpoints.up("md")]: {
+        display: "flex",
       },
     },
     sectionMobile: {
-      display: 'flex',
-      [theme.breakpoints.up('md')]: {
-        display: 'none',
+      display: "flex",
+      [theme.breakpoints.up("md")]: {
+        display: "none",
       },
     },
-  }),
+  })
 );
 
 export default function Header() {
-  // const { isAuthenticated } = useSelector((state: RootState) => state.system, shallowEqual)
-  const { userAvatar, isAuthenticated } = useSelector((state: RootState) => state.user, shallowEqual)
+  const { userAvatar, isAuthenticated } = useSelector(
+    (state: RootState) => state.user,
+    shallowEqual
+  );
 
   const history = useHistory();
 
   const classes = useStyles();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState<boolean>(false);
+  const [
+    mobileMoreAnchorEl,
+    setMobileMoreAnchorEl,
+  ] = React.useState<null | HTMLElement>(null);
 
   const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
     setMobileMenuOpen(false);
   };
 
-  const handleMobileMenuOpen = () => {
+  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setMobileMoreAnchorEl(event.currentTarget);
     setMobileMenuOpen(true);
   };
 
-  const mobileAuthMenu = isAuthenticated ? <p>Profile</p> : <Button onClick={() => history.push("/signup")}>Login</Button>
-  const accountMenu = !userAvatar ? <AccountCircle /> : <Avatar alt="avatar" src={userAvatar} />
+  const mobileAuthMenu = isAuthenticated ? (
+    <div>Profile</div>
+  ) : (
+    <Button onClick={() => history.push("/signup")}>Login</Button>
+  );
+  const accountMenu = !userAvatar ? (
+    <AccountCircle />
+  ) : (
+    <Avatar alt="avatar" src={userAvatar} />
+  );
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={mobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
@@ -82,7 +99,7 @@ export default function Header() {
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <p>Shopping Cart</p>
+        <div>Shopping Cart</div>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -110,7 +127,12 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography className={classes.title} variant="h6" noWrap onClick={() => history.push("/")}>
+          <Typography
+            className={classes.title}
+            variant="h6"
+            noWrap
+            onClick={() => history.push("/")}
+          >
             React Shop
           </Typography>
           <div className={classes.grow} />
@@ -120,15 +142,21 @@ export default function Header() {
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
-            {isAuthenticated ? <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
-              {accountMenu}
-            </IconButton> : <Button onClick={() => history.push("/signup")} color="inherit">Login</Button>}
+            {isAuthenticated ? (
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                color="inherit"
+              >
+                {accountMenu}
+              </IconButton>
+            ) : (
+              <Button onClick={() => history.push("/signup")} color="inherit">
+                Login
+              </Button>
+            )}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

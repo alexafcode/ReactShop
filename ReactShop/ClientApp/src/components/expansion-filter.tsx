@@ -5,7 +5,8 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { RadioFilter } from ".";
+import { RadioFilter, CheckboxFilter } from ".";
+import { ExpansionsProps } from "./types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,39 +19,46 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-// ToDo
-type FilterType = {
-  type: string;
-  name: string;
-  value: (string | number)[];
-};
-type Props = {
-  filter: FilterType;
-};
 
-const ExpansionFilter: React.FC<Props> = (props) => {
+const ExpansionFilter: React.FC<ExpansionsProps> = ({ filter }) => {
   const classes = useStyles();
-  const { filter } = props;
 
   if (filter.type === "checkbox") {
-    return null;
+    return (
+      <div className={classes.root}>
+        <ExpansionPanel>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+          >
+            <Typography component={"span"} className={classes.heading}>
+              {filter.name}
+            </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <CheckboxFilter value={filter.value} />
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      </div>
+    );
   }
 
   return (
-    <ExpansionPanel>
-      <ExpansionPanelSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
-        <Typography className={classes.heading}>{filter.name}</Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails>
-        <Typography>
+    <div className={classes.root}>
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+        >
+          <Typography component={"span"} className={classes.heading}>
+            {filter.name}
+          </Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
           <RadioFilter value={filter.value} />
-        </Typography>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    </div>
   );
 };
 
