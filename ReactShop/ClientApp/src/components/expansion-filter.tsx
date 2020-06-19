@@ -18,17 +18,24 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+// ToDo
 type FilterType = {
-  name: string,
-  value: any[]
-}
+  type: string;
+  name: string;
+  value: (string | number)[];
+};
 type Props = {
-  filter: FilterType
-}
+  filter: FilterType;
+};
 
 const ExpansionFilter: React.FC<Props> = (props) => {
   const classes = useStyles();
   const { filter } = props;
+
+  if (filter.type === "checkbox") {
+    return null;
+  }
+
   return (
     <ExpansionPanel>
       <ExpansionPanelSummary
@@ -40,7 +47,7 @@ const ExpansionFilter: React.FC<Props> = (props) => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <Typography>
-          <RadioFilter />
+          <RadioFilter value={filter.value} />
         </Typography>
       </ExpansionPanelDetails>
     </ExpansionPanel>

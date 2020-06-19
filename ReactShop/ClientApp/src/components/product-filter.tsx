@@ -11,15 +11,23 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type FilterListType = {
-  name: string,
-  value: any[]
-}
+  type: string;
+  name: string;
+  value: (string | number)[];
+};
 const radioFilterList: FilterListType[] = [
   {
+    type: "radio",
     name: "Price",
     value: ["All", 5000, 10000, 15000],
   },
   {
+    type: "radio",
+    name: "Wide Screen",
+    value: ["All", 4.0, 5.0, 6.0],
+  },
+  {
+    type: "checkbox",
     name: "Wide Screen",
     value: ["All", 4.0, 5.0, 6.0],
   },
@@ -28,11 +36,11 @@ const radioFilterList: FilterListType[] = [
 const ProductFilter: React.FC = () => {
   const classes = useStyles();
 
-
   return (
     <div className={classes.root}>
-      {radioFilterList.map(f => <ExpansionFilter filter={f} />
-      )}
+      {radioFilterList.map((f) => (
+        <ExpansionFilter filter={f} />
+      ))}
     </div>
   );
 };
