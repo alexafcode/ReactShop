@@ -57,8 +57,8 @@ const ProductFilter: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      {radioFilterList.map((f) => (
-        <ExpansionFilter key={f.name} filter={f} />
+      {radioFilterList.map((filter) => (
+        <ExpansionFilter key={filter.name} filter={filter} />
       ))}
     </div>
   );

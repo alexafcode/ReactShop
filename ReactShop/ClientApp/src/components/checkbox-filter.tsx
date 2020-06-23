@@ -4,7 +4,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { FilterTypeProps } from "./types";
+import { FilterTypeProps, CheckboxInitialType } from "./types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,13 +28,7 @@ const CheckboxFilter: React.FC<FilterTypeProps> = ({ value }) => {
     };
   });
 
-  type InitialArrayType = {
-    name: string;
-    checked: boolean;
-    value: number;
-  };
-
-  const [state, setState] = useState<Array<InitialArrayType>>(initial);
+  const [state, setState] = useState<Array<CheckboxInitialType>>(initial);
 
   const handleChange = (name: string) => (
     event: React.ChangeEvent<HTMLInputElement>

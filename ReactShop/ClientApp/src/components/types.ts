@@ -17,3 +17,32 @@ export type ExpansionsProps = {
 export type FilterTypeProps = {
   value: FilterValueType[];
 };
+
+export type CheckboxInitialType = {
+  name: string;
+  checked: boolean;
+  value: number;
+};
+
+/// Product
+export type ProductsType = {
+  id: number;
+  manufacturer: string;
+  name: string;
+  cpu_name: string;
+  cpu_core: number;
+  ram: number;
+  sim: number;
+  screen_width: number;
+  screen_height: number;
+  resolution: number;
+  rom: number;
+  camera: number;
+  battery: number;
+  os: string;
+  rating: number;
+  image: string;
+  image_preview: string;
+  image_large: string;
+  price: number;
+};
