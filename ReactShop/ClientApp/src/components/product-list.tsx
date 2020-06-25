@@ -11,9 +11,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(2),
       // backgroundColor: theme.palette.background.default,
     },
-    grid: {
-      margin: theme.spacing(3),
-    },
   })
 );
 
@@ -28,6 +25,7 @@ const products: Array<ProductsType> = [
     sim: 1,
     screen_width: 1792,
     screen_height: 828,
+    screen_size: 6.1,
     resolution: 326,
     rom: 128,
     camera: 2,
@@ -51,11 +49,11 @@ const ProductList: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container className={classes.grid}>
+      <Grid container>
         <Grid item xs={11} sm={2}>
           <ProductFilter />
         </Grid>
-        <Grid item xs={12} sm={10}>
+        <Grid item xs={12} sm={9}>
           {productsItems}
         </Grid>
       </Grid>

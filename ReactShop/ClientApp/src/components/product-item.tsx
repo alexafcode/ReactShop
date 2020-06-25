@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
     paper: {
       padding: theme.spacing(2),
       margin: "auto",
-      maxWidth: "70%",
+      maxWidth: "65%",
     },
     image: {
       width: 128,
@@ -65,30 +65,45 @@ const ProductItem: React.FC<ProductItemProps> = ({
                   {product.name}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
+                  Size: {product.screen_size} inch Resolution:{" "}
+                  {product.resolution}ppx
+                </Typography>
+                <Typography variant="body2" gutterBottom>
                   Full resolution:
                   {`${product.screen_width}X${product.screen_height}`}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  Resolution: {product.resolution}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  CPU: {product.cpu_name}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  RAM: {product.ram} Gb
+                  Resolution: {product.resolution}ppx
                 </Typography>
               </Grid>
             </Grid>
           </Grid>
           <Grid item xs={6} sm container>
-            <Grid item xs container direction="column" spacing={2}>
-              <Grid item></Grid>
+            <Grid item xs container direction="column">
+              <Typography variant="body2" color="textSecondary">
+                CPU: {product.cpu_name}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                CPU Core: {product.cpu_core}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                RAM: {product.ram} Gb
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                Sim card: {product.sim}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                Battery: {product.battery} mAh
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                OS: {product.os}
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
-        <Typography variant="h6" className={classes.price}>
+        {/* <Typography variant="h6" className={classes.price}>
           ${product.price}
-        </Typography>
+        </Typography> */}
         <Grid
           container
           direction="row"
@@ -101,6 +116,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
             precision={0.5}
             readOnly
           />
+          <Typography className={classes.price}>${product.price}</Typography>
           <Button
             variant="contained"
             color="primary"

@@ -35,6 +35,7 @@ export type ProductsType = {
   sim: number;
   screen_width: number;
   screen_height: number;
+  screen_size: number;
   resolution: number;
   rom: number;
   camera: number;
