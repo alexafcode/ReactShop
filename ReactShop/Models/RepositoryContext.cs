@@ -14,7 +14,7 @@ namespace ReactShop.Models
         }
 
         public DbSet<User> Users { get; set; }
-        // public DbSet<Propduc> Propducs { get; set; }
+        public DbSet<Phone> Phones { get; set; }
 
     }
 }

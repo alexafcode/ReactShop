@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { ProductFilter, ProductItem } from ".";
-import { ProductsType } from "./types";
+import { PhonesType } from "./types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,11 +14,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const products: Array<ProductsType> = [
+const phones: Array<PhonesType> = [
   {
     id: 1,
     manufacturer: "Apple",
-    name: "Iphone 11 128Gb",
+    phone_name: "Iphone 11 128Gb",
     cpu_name: "A13 Bionic",
     cpu_core: 6,
     ram: 4,
@@ -43,8 +43,8 @@ const products: Array<ProductsType> = [
 const ProductList: React.FC = () => {
   const classes = useStyles();
 
-  const productsItems = products.map((product: ProductsType) => (
-    <ProductItem key={product.id} product={product} />
+  const productsItems = phones.map((phones: PhonesType) => (
+    <ProductItem key={phone.id} phone={phone} />
   ));
 
   return (

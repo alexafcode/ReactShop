@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Paper from "@material-ui/core/Paper";
-import { ProductsType } from "./types";
+import { PhonesType } from "./types";
 import Rating from "@material-ui/lab/Rating";
 import Button from "@material-ui/core/Button";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
@@ -37,11 +37,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type ProductItemProps = {
-  product: ProductsType;
+  phone: PhonesType;
 };
 
 const ProductItem: React.FC<ProductItemProps> = ({
-  product,
+  phone,
 }: ProductItemProps) => {
   const classes = useStyles();
 
@@ -54,7 +54,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
               <img
                 className={classes.img}
                 alt="complex"
-                src={product.image_preview}
+                src={phone.image_preview}
               />
             </ButtonBase>
           </Grid>
@@ -62,18 +62,18 @@ const ProductItem: React.FC<ProductItemProps> = ({
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="h5" color={"primary"}>
-                  {product.name}
+                  {phone.phone_name}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  Size: {product.screen_size} inch Resolution:{" "}
-                  {product.resolution}ppx
+                  Size: {phone.screen_size} inch Resolution: {phone.resolution}
+                  ppx
                 </Typography>
                 <Typography variant="body2" gutterBottom>
                   Full resolution:
-                  {`${product.screen_width}X${product.screen_height}`}
+                  {`${phone.screen_width}X${phone.screen_height}`}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  Resolution: {product.resolution}ppx
+                  Resolution: {phone.resolution}ppx
                 </Typography>
               </Grid>
             </Grid>
@@ -81,29 +81,26 @@ const ProductItem: React.FC<ProductItemProps> = ({
           <Grid item xs={6} sm container>
             <Grid item xs container direction="column">
               <Typography variant="body2" color="textSecondary">
-                CPU: {product.cpu_name}
+                CPU: {phone.cpu_name}
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                CPU Core: {product.cpu_core}
+                CPU Core: {phone.cpu_core}
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                RAM: {product.ram} Gb
+                RAM: {phone.ram} Gb
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                Sim card: {product.sim}
+                Sim card: {phone.sim}
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                Battery: {product.battery} mAh
+                Battery: {phone.battery} mAh
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                OS: {product.os}
+                OS: {phone.os}
               </Typography>
             </Grid>
           </Grid>
         </Grid>
-        {/* <Typography variant="h6" className={classes.price}>
-          ${product.price}
-        </Typography> */}
         <Grid
           container
           direction="row"
@@ -112,11 +109,11 @@ const ProductItem: React.FC<ProductItemProps> = ({
         >
           <Rating
             name="half-rating"
-            defaultValue={product.rating}
+            defaultValue={phone.rating}
             precision={0.5}
             readOnly
           />
-          <Typography className={classes.price}>${product.price}</Typography>
+          <Typography className={classes.price}>${phone.price}</Typography>
           <Button
             variant="contained"
             color="primary"

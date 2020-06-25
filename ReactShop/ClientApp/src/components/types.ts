@@ -25,10 +25,10 @@ export type CheckboxInitialType = {
 };
 
 /// Product
-export type ProductsType = {
+export type PhonesType = {
   id: number;
   manufacturer: string;
-  name: string;
+  phone_name: string;
   cpu_name: string;
   cpu_core: number;
   ram: number;
