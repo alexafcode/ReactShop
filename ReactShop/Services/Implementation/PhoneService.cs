@@ -6,6 +6,7 @@ using ReactShop.Models;
 using ReactShop.Services.Interfaces;
 using ReactShop.Interfaces;
 using ReactShop.Helpers;
+using ReactShop.ViewModels;;
 
 namespace ReactShop.Services.Implementation
 {
@@ -23,6 +24,10 @@ namespace ReactShop.Services.Implementation
         public Phone GetPhoneById(int id)
         {
             return _repository.GetPhoneById(id);
+        }
+        public async Task AddPhone (AddPhoneRequest request)
+        {
+            Phone phone = new Phone();
         }
     }
 }
