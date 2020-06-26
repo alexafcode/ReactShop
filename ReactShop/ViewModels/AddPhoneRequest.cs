@@ -21,7 +21,7 @@ namespace ReactShop.ViewModels
         [Required]
         public int ScreenHeight { get; set; }
         [Required]
-        public int ScreenSize { get; set; }
+        public decimal ScreenSize { get; set; }
         [Required]
         public int Resolution { get; set; }
         [Required]
@@ -33,7 +33,7 @@ namespace ReactShop.ViewModels
         [Required]
         public string OS { get; set; }
         [Required]
-        public int Rating { get; set; }
+        public decimal Rating { get; set; }
         [Required]
         public string Image { get; set; }
         [Required]

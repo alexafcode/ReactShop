@@ -22,16 +22,14 @@ namespace ReactShop.Repositories
             using var context = ContextFactory.CreateDbContext(ConnectionString);
             return context.Phones.FirstOrDefault(p => p.Id == id);
         }
-        public Phone AddPhone(Phone phone)
+        public async Task AddPhone(Phone phone)
         {
             using var context = ContextFactory.CreateDbContext(ConnectionString);
             if(!context.Phones.Any(p => p.PhoneName == phone.PhoneName))
             {
                 context.Add(phone);
-                context.SaveChanges();
-                return phone;
+                await context.SaveChangesAsync();
             }
-            return null;
         }
     }
 }

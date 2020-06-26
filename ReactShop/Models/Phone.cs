@@ -16,13 +16,13 @@ namespace ReactShop.Models
         public int Sim { get; set; }
         public int ScreenWidth { get; set; }
         public int ScreenHeight { get; set; }
-        public int ScreenSize { get; set; }
+        public decimal ScreenSize { get; set; }
         public int Resolution { get; set; }
         public int Rom { get; set; }
         public int Camera { get; set; }
         public int Battery { get; set; }
         public string OS { get; set; }
-        public int Rating { get; set; }
+        public decimal Rating { get; set; }
         public string Image { get; set; }
         public string ImagePreview { get; set; }
         public string ImageLarge { get; set; }

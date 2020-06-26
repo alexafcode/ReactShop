@@ -12,6 +12,6 @@ namespace ReactShop.Services.Interfaces
     {
         IEnumerable<Phone> GetAll();
         Phone GetPhoneById(int id);
-        Task AddPhone(Phone phone);
+        Task AddPhone(AddPhoneRequest request);
     }
 }

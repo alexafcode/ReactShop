@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReactShop.Models;
 using ReactShop.Services.Interfaces;
+using ReactShop.ViewModels;
 
 namespace ReactShop.Controllers
 {
@@ -32,6 +33,15 @@ namespace ReactShop.Controllers
         public Phone GetPhoneById([FromQuery]int id)
         {
             return _service.GetPhoneById(id);
+        }
+        [Route("new")]
+        [HttpPost]
+        public async Task<IActionResult> AddPhone([FromBody] AddPhoneRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            await _service.AddPhone(request);
+            return Ok();
         }
 
         //// POST: api/Phone
