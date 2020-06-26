@@ -69,13 +69,13 @@ namespace ReactShop
             services.AddScoped<IRepositoryContextFactory, RepositoryContextFactory>();
 
             services.AddScoped<IUserRepository>(provider => new UserRepository(Configuration.GetConnectionString("DefaultConnection"), provider.GetService<IRepositoryContextFactory>()));
-            //services.AddScoped<IProductRepository>(provider => new ProductRepository(Configuration.GetConnectionString("DefaultConnection"), provider.GetService<IRepositoryContextFactory>()));
+            services.AddScoped<IPhoneRepositorycs>(provider => new PhoneRepository(Configuration.GetConnectionString("DefaultConnection"), provider.GetService<IRepositoryContextFactory>()));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IConfiguration>(Configuration);
 
             //Add Services
             services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IPhoneService, PhoneService>();
 
 
             // In production, the React files will be served from this directory

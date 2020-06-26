@@ -43,7 +43,7 @@ const phones: Array<PhonesType> = [
 const ProductList: React.FC = () => {
   const classes = useStyles();
 
-  const productsItems = phones.map((phones: PhonesType) => (
+  const productsItems = phones.map((phone: PhonesType) => (
     <ProductItem key={phone.id} phone={phone} />
   ));
 

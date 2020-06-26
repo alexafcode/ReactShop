@@ -16,6 +16,13 @@ namespace ReactShop.Services.Implementation
         {
             _repository = repository;
         }
-
+        public IEnumerable<Phone> GetAll()
+        {
+            return _repository.GetAll();
+        }
+        public Phone GetPhoneById(int id)
+        {
+            return _repository.GetPhoneById(id);
+        }
     }
 }
